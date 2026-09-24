@@ -1,14 +1,14 @@
 // Edit this block to make the page yours.
 const profile = {
-  name: "Alex Rivera",
-  bio: "Product designer and occasional writer. I make small tools and write about how they work.",
+  name: "Akinyeju Paul",
+  bio: "Developer bridging design and logic to build clean, performant React applications with intuitive interfaces.",
 };
 
 const links = [
-  { label: "Portfolio", url: "https://example.com/portfolio" },
-  { label: "Newsletter", url: "https://example.com/newsletter" },
-  { label: "GitHub", url: "https://github.com/your-username" },
-  { label: "LinkedIn", url: "https://linkedin.com/in/your-username" },
+  { label: "Instagram", url: "https://instagram.com/justttife" },
+  { label: "X", url: "https://x.com/justttife" },
+  { label: "GitHub", url: "https://github.com/justttife" },
+  { label: "Email Me", url: "mailto:boluwatifeakinyeju@gmail.com" },
 ];
 
 const initials = (name) =>
