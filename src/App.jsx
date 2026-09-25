@@ -5,13 +5,23 @@ export default function App() {
     return localStorage.getItem('theme') === 'dark' || true;
   });
 
+  const [copied, setCopied] = useState(false);
+
   useEffect(() => {
     localStorage.setItem('theme', darkMode ? 'dark' : 'light');
   }, [darkMode]);
 
   const toggleTheme = () => setDarkMode(!darkMode);
 
-  // Official Brand SVG Icons
+  const emailAddress = 'your-email@gmail.com'; // Update with your actual email
+
+  const handleEmailClick = (e) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(emailAddress);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   const links = [
     {
       label: 'GitHub',
@@ -32,8 +42,8 @@ export default function App() {
       )
     },
     {
-      label: 'Email Me',
-      url: 'mailto:example@gmail.com',
+      label: copied ? 'Copied to Clipboard!' : 'Email Me',
+      onClick: handleEmailClick,
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
           <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
@@ -42,7 +52,7 @@ export default function App() {
     },
     {
       label: 'X (Twitter)',
-      url: 'https://x.com',
+      url: 'https://x.com', // Update with your actual handle
       icon: (
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -57,6 +67,9 @@ export default function App() {
         position: 'relative',
         minHeight: '100vh',
         backgroundColor: darkMode ? '#0b1120' : '#f1f5f9',
+        backgroundImage: darkMode
+          ? 'radial-gradient(at 50% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 50%)'
+          : 'radial-gradient(at 50% 0%, rgba(2, 132, 199, 0.1) 0px, transparent 50%)',
         color: darkMode ? '#f8fafc' : '#0f172a',
         display: 'flex',
         flexDirection: 'column',
@@ -115,6 +128,7 @@ export default function App() {
         <img
           src="https://github.com/justttife.png"
           alt="Paul Akinyeju"
+          className="profile-avatar"
           style={{
             width: '110px',
             height: '110px',
@@ -122,7 +136,8 @@ export default function App() {
             objectFit: 'cover',
             marginBottom: '1.25rem',
             border: darkMode ? '3px solid #38bdf8' : '3px solid #0284c7',
-            boxShadow: '0 8px 16px rgba(0,0,0,0.15)'
+            boxShadow: '0 8px 16px rgba(0,0,0,0.15)',
+            cursor: 'pointer'
           }}
         />
 
@@ -136,14 +151,11 @@ export default function App() {
 
         {/* Links List */}
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
-          {links.map((link, index) => (
-            <a
-              key={index}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="animated-link"
-              style={{
+          {links.map((link, index) => {
+            const commonProps = {
+              key: index,
+              className: 'animated-link',
+              style: {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -156,17 +168,36 @@ export default function App() {
                 fontWeight: '600',
                 fontSize: '0.95rem',
                 textDecoration: 'none',
+                cursor: 'pointer',
                 backgroundColor: darkMode ? '#0f172a' : '#ffffff',
                 color: darkMode ? '#f8fafc' : '#0f172a',
                 border: darkMode ? '1px solid #334155' : '1px solid #e2e8f0'
-              }}
-            >
-              <span style={{ display: 'inline-flex', alignItems: 'center' }}>{link.icon}</span>
-              <span>{link.label}</span>
-            </a>
-          ))}
+              }
+            };
+
+            if (link.onClick) {
+              return (
+                <button key={index} onClick={link.onClick} {...commonProps}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center' }}>{link.icon}</span>
+                  <span>{link.label}</span>
+                </button>
+              );
+            }
+
+            return (
+              <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" {...commonProps}>
+                <span style={{ display: 'inline-flex', alignItems: 'center' }}>{link.icon}</span>
+                <span>{link.label}</span>
+              </a>
+            );
+          })}
         </div>
       </div>
+
+      {/* Footer Credit */}
+      <p style={{ opacity: 0.5, fontSize: '0.8rem', marginTop: '2rem' }}>
+        © {new Date().getFullYear()} Paul Akinyeju
+      </p>
     </div>
   );
 }
