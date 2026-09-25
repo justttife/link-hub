@@ -66,12 +66,13 @@ export default function App() {
       >
         {/* Profile Image */}
         <img
-          src="https://via.placeholder.com/120"
+          src="https://github.com/justttife.png"
           alt="Paul Akinyeju"
           style={{
             width: '120px',
             height: '120px',
             borderRadius: '50%',
+            objectFit: 'cover',
             marginBottom: '1rem',
             boxShadow: darkMode ? '0 0 20px rgba(255,255,255,0.1)' : '0 4px 12px rgba(0,0,0,0.1)'
           }}
