@@ -25,6 +25,7 @@ export default function App() {
  return (
     <div
       style={{
+        position: 'relative', // Allows absolute positioning inside
         minHeight: '100vh',
         backgroundColor: darkMode ? '#0f172a' : '#f8fafc',
         color: darkMode ? '#f8fafc' : '#0f172a',
@@ -40,7 +41,9 @@ export default function App() {
       <button
         onClick={toggleTheme}
         style={{
-          marginBottom: '2rem',
+          position: 'absolute',
+          top: '1.5rem',
+          right: '1.5rem',
           padding: '0.5rem 1rem',
           borderRadius: '20px',
           border: 'none',
