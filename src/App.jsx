@@ -61,6 +61,9 @@ export default function App() {
           width: '100%',
           maxWidth: '400px',
           textAlign: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
           animation: 'fadeIn 0.8s ease-out'
         }}
       >
@@ -69,6 +72,9 @@ export default function App() {
           src="https://github.com/justttife.png"
           alt="Paul Akinyeju"
           style={{
+            display: 'block',
+            marginLeft: 'auto',
+            marginRight: 'auto',
             width: '120px',
             height: '120px',
             borderRadius: '50%',
