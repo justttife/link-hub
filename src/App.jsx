@@ -102,6 +102,8 @@ export default function App() {
               className="animated-link"
               style={{
                 display: 'block',
+                width: '100%',
+                boxSizing: 'border-box',
                 padding: '0.875rem 1.5rem',
                 borderRadius: '0.5rem',
                 textDecoration: 'none',
