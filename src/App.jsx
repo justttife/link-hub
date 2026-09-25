@@ -22,40 +22,39 @@ export default function App() {
     { label: "X (Twitter)", url: "https://x.com/yourusername" }
   ];
 
-  return (
+ return (
     <div
       style={{
         minHeight: '100vh',
         backgroundColor: darkMode ? '#0f172a' : '#f8fafc',
         color: darkMode ? '#f8fafc' : '#0f172a',
-        transition: 'background-color 0.3s ease, color 0.3s ease',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         padding: '2rem 1rem',
-        fontFamily: 'sans-serif'
+        boxSizing: 'border-box',
+        transition: 'background-color 0.3s ease, color 0.3s ease'
       }}
     >
-      {/* Theme Toggle Button */}
+      {/* Light / Dark Toggle Button */}
       <button
         onClick={toggleTheme}
         style={{
-          alignSelf: 'flex-end',
+          marginBottom: '2rem',
           padding: '0.5rem 1rem',
-          borderRadius: '9999px',
+          borderRadius: '20px',
           border: 'none',
           cursor: 'pointer',
-          backgroundColor: darkMode ? '#334155' : '#e2e8f0',
-          color: darkMode ? '#fff' : '#000',
+          backgroundColor: darkMode ? '#1e293b' : '#e2e8f0',
+          color: darkMode ? '#ffffff' : '#000000',
           fontWeight: 'bold',
-          marginBottom: '2rem',
-          transition: 'transform 0.2s ease',
+          transition: 'all 0.2s ease'
         }}
       >
         {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
       </button>
 
-      {/* Main Container with Entrance Animation */}
+      {/* Main Container */}
       <div
         style={{
           width: '100%',
@@ -72,18 +71,17 @@ export default function App() {
           src="https://github.com/justttife.png"
           alt="Paul Akinyeju"
           style={{
-            display: 'block',
-            marginLeft: 'auto',
-            marginRight: 'auto',
             width: '120px',
             height: '120px',
             borderRadius: '50%',
             objectFit: 'cover',
             marginBottom: '1rem',
-            boxShadow: darkMode ? '0 0 20px rgba(255,255,255,0.1)' : '0 4px 12px rgba(0,0,0,0.1)'
+            border: '3px solid white',
+            boxShadow: darkMode ? '0 0 20px rgba(255,255,255,0.15)' : '0 4px 12px rgba(0,0,0,0.1)'
           }}
         />
 
+        {/* Header / Bio */}
         <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
           Paul Akinyeju
         </h1>
@@ -91,8 +89,8 @@ export default function App() {
           Developer & Tech Enthusiast
         </p>
 
-        {/* Links List */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        {/* Links List Wrapper */}
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {links.map((link, index) => (
             <a
               key={index}
@@ -106,13 +104,13 @@ export default function App() {
                 boxSizing: 'border-box',
                 padding: '0.875rem 1.5rem',
                 borderRadius: '0.5rem',
-                textDecoration: 'none',
+                textAlign: 'center',
                 fontWeight: '600',
+                textDecoration: 'none',
+                transition: 'all 0.3s ease',
                 backgroundColor: darkMode ? '#1e293b' : '#ffffff',
                 color: darkMode ? '#f8fafc' : '#0f172a',
-                border: darkMode ? '1px solid #334155' : '1px solid #e2e8f0',
-                boxShadow: darkMode ? '0 2px 4px rgba(0,0,0,0.2)' : '0 2px 4px rgba(0,0,0,0.05)',
-                transition: 'all 0.2s ease-in-out'
+                border: darkMode ? '1px solid #334155' : '1px solid #e2e8f0'
               }}
             >
               {link.label}
@@ -122,4 +120,3 @@ export default function App() {
       </div>
     </div>
   );
-}
