@@ -17,3 +17,22 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animated-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15) !important;
+}
+
+.animated-link:active {
+  transform: translateY(0);
+}
