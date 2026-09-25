@@ -1,59 +1,116 @@
-// Edit this block to make the page yours.
-const profile = {
-  name: "Akinyeju Paul",
-  bio: "Developer bridging design and logic to build clean, performant React applications with intuitive interfaces.",
-};
-
-const links = [
-  { label: "Instagram", url: "https://instagram.com/justttife" },
-  { label: "X", url: "https://x.com/justttife" },
-  { label: "GitHub", url: "https://github.com/justttife" },
-  { label: "Email Me", url: "mailto:boluwatifeakinyeju@gmail.com" },
-];
-
-const initials = (name) =>
-  name
-    .split(" ")
-    .map((part) => part[0])
-    .join("")
-    .slice(0, 2);
-
-const domain = (url) => new URL(url).hostname.replace(/^www\./, "");
+import React, { useState, useEffect } from 'react';
 
 export default function App() {
-  return (
-    <main className="mx-auto min-h-dvh w-full max-w-md px-6 py-16 sm:py-24">
-      <header className="mb-12">
-        <div
-          aria-hidden="true"
-          className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-line bg-raised font-serif text-xl"
-        >
-          {initials(profile.name)}
-        </div>
-        <h1 className="font-serif text-4xl leading-tight">{profile.name}</h1>
-        <p className="mt-3 max-w-sm leading-relaxed text-muted">{profile.bio}</p>
-      </header>
+  // Check user preference or local storage for dark mode
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem('theme') === 'dark' || true; // Defaults to dark mode
+  });
 
-      <nav aria-label="Links">
-        <ul className="border-t border-line">
-          {links.map(({ label, url }) => (
-            <li key={url} className="border-b border-line">
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="-mx-3 flex items-baseline justify-between gap-4 rounded-md px-3 py-5 transition-colors hover:bg-raised focus-visible:bg-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
-              >
-                <span className="text-lg font-medium">
-                  {label}
-                  <span className="sr-only"> (opens in a new tab)</span>
-                </span>
-                <span className="truncate text-sm text-muted">{domain(url)}</span>
-              </a>
-            </li>
+  // Save theme preference whenever it changes
+  useEffect(() => {
+    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+  }, [darkMode]);
+
+  const toggleTheme = () => {
+    setDarkMode(!darkMode);
+  };
+
+  const links = [
+    { label: "GitHub", url: "https://github.com/yourusername" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/yourusername" },
+    { label: "Email Me", url: "mailto:paulakinyeju@gmail.com" },
+    { label: "X (Twitter)", url: "https://x.com/yourusername" }
+  ];
+
+  return (
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: darkMode ? '#0f172a' : '#f8fafc',
+        color: darkMode ? '#f8fafc' : '#0f172a',
+        transition: 'background-color 0.3s ease, color 0.3s ease',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '2rem 1rem',
+        fontFamily: 'sans-serif'
+      }}
+    >
+      {/* Theme Toggle Button */}
+      <button
+        onClick={toggleTheme}
+        style={{
+          alignSelf: 'flex-end',
+          padding: '0.5rem 1rem',
+          borderRadius: '9999px',
+          border: 'none',
+          cursor: 'pointer',
+          backgroundColor: darkMode ? '#334155' : '#e2e8f0',
+          color: darkMode ? '#fff' : '#000',
+          fontWeight: 'bold',
+          marginBottom: '2rem',
+          transition: 'transform 0.2s ease',
+        }}
+      >
+        {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+      </button>
+
+      {/* Main Container with Entrance Animation */}
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '400px',
+          textAlign: 'center',
+          animation: 'fadeIn 0.8s ease-out'
+        }}
+      >
+        {/* Profile Image */}
+        <img
+          src="https://via.placeholder.com/120"
+          alt="Paul Akinyeju"
+          style={{
+            width: '120px',
+            height: '120px',
+            borderRadius: '50%',
+            marginBottom: '1rem',
+            boxShadow: darkMode ? '0 0 20px rgba(255,255,255,0.1)' : '0 4px 12px rgba(0,0,0,0.1)'
+          }}
+        />
+
+        <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+          Paul Akinyeju
+        </h1>
+        <p style={{ opacity: 0.8, marginBottom: '2rem' }}>
+          Developer & Tech Enthusiast
+        </p>
+
+        {/* Links List */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {links.map((link, index) => (
+            <a
+              key={index}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="animated-link"
+              style={{
+                display: 'block',
+                padding: '0.875rem 1.5rem',
+                borderRadius: '0.5rem',
+                textDecoration: 'none',
+                fontWeight: '600',
+                backgroundColor: darkMode ? '#1e293b' : '#ffffff',
+                color: darkMode ? '#f8fafc' : '#0f172a',
+                border: darkMode ? '1px solid #334155' : '1px solid #e2e8f0',
+                boxShadow: darkMode ? '0 2px 4px rgba(0,0,0,0.2)' : '0 2px 4px rgba(0,0,0,0.05)',
+                transition: 'all 0.2s ease-in-out'
+              }}
+            >
+              {link.label}
+            </a>
           ))}
-        </ul>
-      </nav>
-    </main>
+        </div>
+      </div>
+    </div>
   );
 }
